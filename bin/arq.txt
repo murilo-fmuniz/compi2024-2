@@ -1,12 +1,3 @@
-
-+-+-
-teste
-som 
-123 
-testando ooi + -
-* 1 + 2 / 3
-PROG
-
 :DEC
 parametro:INT
 fatorial:INT
@@ -15,11 +6,10 @@ fatorial:INT
 # Calcula o fatorial de um número inteiro (comentário)
 LER parametro
 fatorial := parametro
-SE arametro == 0 ENTAO fatorial := 1
+SE parametro == 0 ENTAO fatorial := 1
 ENQTO parametro > 1
 INI
 fatorial := fatorial * (parametro – 1) 
 parametro := parametro – 1
 FIM
 IMPRIMIR fatorial
-

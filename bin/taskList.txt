@@ -1,0 +1,37 @@
+gramática arrumada:
+
+
+Programa → ':' 'DEC' ListaDeclaracoes ':' 'PROG' ListaComandos;
+ListaDeclaracoes → Declaracao ListaDeclaracoes2;
+ListaDeclaracoes2 → ListaDeclaracoes | e;
+Declaracao → VARIAVEL ':' TipoVar;
+TipoVar → 'INT' | 'REAL';
+
+ExpressaoAritmetica → TermoAritmetico ExpressaoAritmetica2;
+ExpressaoAritmetica2 → '+' ExpressaoAritmetica | '-' ExpressaoAritmetica | e;
+TermoAritmetico → FatorAritmetico TermoAritmetico2;
+TermoAritmetico2 → '*' FatorAritmetico TermoAritmetico2 | '/' FatorAritmetico TermoAritmetico2 | e;
+FatorAritmetico → NUMINT | NUMREAL | VARIAVEL | '(' ExpressaoAritmetica ')'
+ExpressaoRelacional → TermoRelacional ExpressaoRelacional2;
+ExpressaoRelacional2 → OperadorBooleano TermoRelacional ExpressaoRelacional2 | e;
+TermoRelacional → ExpressaoAritmetica OP_REL ExpressaoAritmetica | '(' ExpressaoRelacional ')';
+OperadorBooleano → 'E' | 'OU';
+
+ListaComandos → Comando ListaComandos2;
+ListaComandos2 → ListaComandos | e;
+
+Comando → ComandoAtribuicao | ComandoEntrada | ComandoSaida | ComandoCondicao | ComandoRepeticao | SubAlgoritmo;
+ComandoAtribuicao → VARIAVEL ':=' ExpressaoAritmetica;
+ComandoEntrada → 'LER' VARIAVEL;
+ComandoSaida → 'IMPRIMIR' ComandoSaida2;
+ComandoSaida2 → VARIAVEL | CADEIA;
+ComandoCondicao → 'SE' ExpressaoRelacional 'ENTAO' Comando ComandoCondicao2;
+ComandoCondicao2 → 'SENAO' Comando | e;
+ComandoRepeticao → 'ENQTO' ExpressaoRelacional Comando;
+SubAlgoritmo → 'INI' ListaComandos 'FIM';
+
+list tokens;
+
+token.tipo == TipoToken.PCDec{
+    tokens.next;
+}
